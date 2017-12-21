@@ -1,13 +1,11 @@
-route = map(str.strip, open("input").read().split(","))
+def getDistance(route):
+    n = route.count("n")
+    ne = route.count("ne")
+    se = route.count("se")
+    s = route.count("s")
+    sw = route.count("sw")
+    nw = route.count("nw")
 
-n = route.count("n")
-ne = route.count("ne")
-se = route.count("se")
-s = route.count("s")
-sw = route.count("sw")
-nw = route.count("nw")
-
-def getDistance():
     # clean n - s
     mv = min(n, s)
     n -= mv
@@ -61,11 +59,13 @@ def getDistance():
 
     return n + ne + se + s + sw + nw
 
-print "n  " + str(n)
-print "ne " + str(ne)
-print "se " + str(se)
-print "s  " + str(s)
-print "sw " + str(sw)
-print "nw " + str(nw)
-print "---"
-print
+route = map(str.strip, open("input").read().split(","))
+
+maxDistance = 0
+while len(route) > 0:
+    route = route[:-1]
+    currentDistance = getDistance(route)
+    if currentDistance > maxDistance:
+        maxDistance = currentDistance
+
+print maxDistance
